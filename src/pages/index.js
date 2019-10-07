@@ -10,22 +10,24 @@ import Grid from "../components/Grid";
 
 
 const IndexPage = ({ data }) => {
-    const t_title = data.allContentfulLesson.edges[0];
-    con
+    const edges = data.allContentfulLesson.edges;
 
+    const items = [];
+    edges.forEach((edge, index) => {
+        items.push(<Column span={{ medium: 6, large: 4 }}>
+            <div>{edge.node.title}</div>
+        </Column>)
+    })
+    
     return (
         <Layout>
             <SEO title="Home" />
             <Container>
                 <Grid staggered>
-                    <Column span={{ medium: 6, large: 4 }}>
-                        <div>{t_title}</div>
-                    </Column>
-                    <Spacer />
-                    <Column justifySelf="stretch" span={{ medium: 6, large: 7 }}>
-                    </Column>
+                    {
+                        items
+                    }
                 </Grid>
-
             </Container>
         </Layout>
     );
